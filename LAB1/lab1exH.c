@@ -24,8 +24,17 @@ void print_array(const char *str, const int *a, int n)
 {
   int i;
   puts(str);
-  for (i = 0; i < n; i++)
+
+  i = 0;
+  for_top:
+    if(i >= n) goto for_bot;
     printf("    %d", a[i]);
+    i++;
+    goto for_top;
+  
+  for_bot:
+    ;
+
   printf("\n");
 }
 
@@ -34,13 +43,27 @@ void sort_array(int *x, int n)
   // This is an implementation of an algorithm called insertion sort.
 
   int outer, inner, vti;
-  for (outer = 1; outer < n; outer++) {
+ 
+  outer = 1;
+  for2_top:
+    if(outer >=n) goto for2_bot;
     vti = x[outer];
     inner = outer;
-    while (inner > 0 && vti < x[inner - 1]) {
+
+    while_top:
+      if(inner <= 0) goto while_bot;
+      if(vti >= x[inner -1]) goto while_bot;
       x[inner] = x[inner - 1];
       inner--;
-    }
+      goto while_top;
+    
+    while_bot:
+      ;
+    
     x[inner] = vti;
-  }
+    outer++;
+    goto for2_top;
+    
+  for2_bot:
+    ;
 }
