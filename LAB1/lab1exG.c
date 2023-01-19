@@ -81,10 +81,10 @@ int main(void)
 
     for2_top_loop:
         if( i < 0) goto for2_bot_loop;
-        printf("%d\n", i);
         dfdx[i] = (i + 1) * f[i + 1];   // Calculus!
         i--;
-    
+        goto for2_top_loop;
+
     for2_bot_loop:
         ;
 
@@ -95,31 +95,47 @@ int main(void)
 
     // fourth set 
 
-
-    while (1) { 
+    while1_top:
+        if(!1) goto while1_bot;
         current_f = polyval(f, POLY_DEGREE, current_x);
         printf("%d update(s) done; x is %.15f; f(x) is %.15e\n",
-            update_count, current_x, current_f);
-       
-        if (fabs(current_f) < MAX_ABS_F)
-            break;
-        if (update_count == max_updates)
-            break;
+               update_count, current_x, current_f);
 
+        if5_top_loop:
+            if(fabs(current_f) >= MAX_ABS_F) goto if5_bot_loop;
+            goto while1_bot;
 
+        if5_bot_loop:
+            ;
+        
+
+        if6_top_loop:
+            if(update_count != max_updates) goto if6_bot_loop;
+            goto while1_bot;
+
+        if6_bot_loop:
+            ;
+        
         current_dfdx = polyval(dfdx, POLY_DEGREE - 1, current_x);
         current_x -= current_f / current_dfdx;
         update_count++;
-    }
+        goto while1_top;
+
+    while1_bot:
+        ;
+
+    
 
 
     // fifth set
 
-    if (fabs(current_f) >= MAX_ABS_F)
+    if7_top_loop:
+        if (fabs(current_f) < MAX_ABS_F) goto if7_bot_loop;
         printf("%d updates performed, |f(x)| still >= %g.\n", 
                update_count, MAX_ABS_F);
-    else
-        printf("Stopped with approximate solution of %.10f.\n", 
+    
+    if7_bot_loop:
+         printf("Stopped with approximate solution of %.10f.\n", 
                current_x);
 
     
