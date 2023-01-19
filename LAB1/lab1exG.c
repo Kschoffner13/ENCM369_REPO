@@ -28,12 +28,24 @@ int main(void)
            "approximate roots of the polynomial\nf(x) = ");
     printf("%.2f", f[0]);
 
+    // first set
 
-    for (i = 1; i <= POLY_DEGREE; i++)
-        if (f[i] >= 0)
+    i = 1;
+    for1_top:
+        if(i > POLY_DEGREE) goto for1_bot;          // end clause
+        
+        if1_top:
+            if(f[i] < 0) goto if1_bot;
             printf(" + %.2f*pow(x,%d)", f[i], i);
-        else
+        
+        if1_bot:
             printf(" - %.2f*pow(x,%d)", -f[i], i);
+        
+        i++;                                        // loop ender
+
+
+    for1_bot:
+    ;
 
 
     printf("\nPlease enter a guess at a root, and a maximum number of\n"
@@ -41,28 +53,47 @@ int main(void)
     n_scanned = scanf("%lf%d", &guess, &max_updates);
 
 
+    // second set
 
-    if (n_scanned != 2) {
+    if3_top_loop:
+        if(n_scanned == 2) goto if3_bot_loop;
         printf("Sorry, I couldn't understand the input.\n");
         exit(1);
-    }
-  
-    if (max_updates < 1)  {
+
+    if3_bot_loop:
+        ;
+
+
+    if4_top_loop:
+        if (max_updates >=1) goto if4_bot_loop;
         printf("Sorry, I must be allowed do at least one update.\n");
         exit(1);
-    }
+
+    if4_bot_loop:
+        ;
+   
 
 
     printf("Running with initial guess %f.\n", guess);
 
+    // third set
+    i = POLY_DEGREE -1;
 
-
-    for (i = POLY_DEGREE - 1; i >= 0; i--)
+    for2_top_loop:
+        if( i < 0) goto for2_bot_loop;
+        printf("%d\n", i);
         dfdx[i] = (i + 1) * f[i + 1];   // Calculus!
+        i--;
+    
+    for2_bot_loop:
+        ;
 
+        
     
     current_x = guess;
     update_count = 0;
+
+    // fourth set 
 
 
     while (1) { 
@@ -82,6 +113,7 @@ int main(void)
     }
 
 
+    // fifth set
 
     if (fabs(current_f) >= MAX_ABS_F)
         printf("%d updates performed, |f(x)| still >= %g.\n", 
@@ -89,6 +121,8 @@ int main(void)
     else
         printf("Stopped with approximate solution of %.10f.\n", 
                current_x);
+
+    
     return 0;
 }
 

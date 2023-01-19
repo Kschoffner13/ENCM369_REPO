@@ -48,8 +48,37 @@ coldp:
 
 // exercise G
 
-for (i = n - 1; i >= 0; i--) {
+for(int i = n - 1; i >= 0; i--) {
         result *= x;
         result += a[i];
     }
     return result;
+
+
+
+ while1_top:
+        if(!1) goto while1_bot;
+        current_f = polyval(f, POLY_DEGREE, current_x);
+        printf("%d update(s) done; x is %.15f; f(x) is %.15e\n",
+               update_count, current_x, current_f);
+        
+        if5_top_loop:
+            if(fabs(current_f)>= MAX_ABS_F) goto if5_bot_loop;
+            return 0;
+
+        if5_bot_loop:
+            ;
+
+        if6_top_loop:
+            if(update_count != max_updates) goto if6_bot_loop;
+            return 0;
+        
+        if6_bot_loop:
+            ;
+        
+        current_dfdx = polyval(dfdx, POLY_DEGREE - 1, current_x);
+        current_x -= current_f / current_dfdx;
+        update_count++;
+
+    while1_bot:
+        ;

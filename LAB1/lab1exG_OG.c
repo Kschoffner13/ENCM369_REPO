@@ -27,6 +27,8 @@ int main(void)
     printf("This program demonstrates use of Newton's Method to find\n"
            "approximate roots of the polynomial\nf(x) = ");
     printf("%.2f", f[0]);
+
+    // frist set
     for (i = 1; i <= POLY_DEGREE; i++)
         if (f[i] >= 0)
             printf(" + %.2f*pow(x,%d)", f[i], i);
@@ -36,6 +38,9 @@ int main(void)
     printf("\nPlease enter a guess at a root, and a maximum number of\n"
            "updates to do, separated by a space.\n");
     n_scanned = scanf("%lf%d", &guess, &max_updates);
+
+
+    // second set
     if (n_scanned != 2) {
         printf("Sorry, I couldn't understand the input.\n");
         exit(1);
@@ -45,24 +50,39 @@ int main(void)
         printf("Sorry, I must be allowed do at least one update.\n");
         exit(1);
     }
+
+
+
     printf("Running with initial guess %f.\n", guess);
+
+    // thrid set
 
     for (i = POLY_DEGREE - 1; i >= 0; i--)
         dfdx[i] = (i + 1) * f[i + 1];   // Calculus!
+    
+    
     current_x = guess;
     update_count = 0;
+
+    // fourth set 
     while (1) { 
         current_f = polyval(f, POLY_DEGREE, current_x);
         printf("%d update(s) done; x is %.15f; f(x) is %.15e\n",
                update_count, current_x, current_f);
+
+        //
         if (fabs(current_f) < MAX_ABS_F)
             break;
         if (update_count == max_updates)
             break;
+
+
         current_dfdx = polyval(dfdx, POLY_DEGREE - 1, current_x);
         current_x -= current_f / current_dfdx;
         update_count++;
     }
+
+    // fifth set 
 
     if (fabs(current_f) >= MAX_ABS_F)
         printf("%d updates performed, |f(x)| still >= %g.\n", 
@@ -73,11 +93,16 @@ int main(void)
     return 0;
 }
 
+
+
 double polyval(const double *a, int n, double x)
 {
     double result = a[n];
     int i;
     
+
+
+
     for (i = n - 1; i >= 0; i--) {
         result *= x;
         result += a[i];
