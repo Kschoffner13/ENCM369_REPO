@@ -55,5 +55,40 @@ for(int i = n - 1; i >= 0; i--) {
     return result;
 
 
+// part H
 
+ for (outer = 1; outer < n; outer++) {
+    vti = x[outer];
+    inner = outer;
+    while (inner > 0 && vti < x[inner - 1]) {
+      x[inner] = x[inner - 1];
+      inner--;
+    }
+    x[inner] = vti;
+  }
+
+
+
+outer = 1;
+  for2_top:
+    if(outer >=n) goto for2_bot;
+    vti = x[outer];
+    inner = outer;
+
+    while_top:
+      if(inner <= 0) goto while_bot;
+      if(vti >= x[inner -1]) goto while_bot;
+      x[inner] = x[inner - 1];
+      inner--;
+      goto while_top;
+    
+    while_bot:
+      ;
+    
+    x[inner] = vti;
+    outer++;
+    goto for2_top;
+    
+  for2_bot:
+    ;
  
