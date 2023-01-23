@@ -1,6 +1,8 @@
 // globals1B.c
 // ENCM 369 Winter 2023 Exercise B
 
+#include <stdio.h>
+
 void copy(int *to, const int *from, int n)
 {
   int i;
@@ -25,6 +27,7 @@ void reverse(int *dest, const int *src, int n)
     // point two
 
     k--;
+    printf("\n%d", k);
   }
 
   // point three
