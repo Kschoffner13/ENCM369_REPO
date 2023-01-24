@@ -68,6 +68,7 @@ L1:
 	lw	t0, (s0)		# t0 = *p
 	add	s2, s2, t0		# sum += t0
 	blt	s3, t0, L3
+Return:
 	addi	s0, s0, 4		# p++
 	j	L1
 L2:		
@@ -76,4 +77,4 @@ L2:
 	
 L3:
 	add	s3, t0, zero
-	j	L1
+	j	Return
