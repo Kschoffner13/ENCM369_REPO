@@ -62,13 +62,13 @@ main:
 	la	s0, abc	        	# p = abc
 	addi	s1, s0, 24		# end = p + 6
 	add	s2, zero, zero	        # sum = 0 
-	addi	s3, zero, -600		# max = 0
+	addi	s3, zero, -600		# max = -600 so that the blt instruction can be used
 L1:
 	beq	s0, s1, L2		# if (p == end) goto L2
 	lw	t0, (s0)		# t0 = *p
 	add	s2, s2, t0		# sum += t0
-	blt	s3, t0, L3
-Return:
+	blt	s3, t0, L3		# checks if max is less than *p
+Return:					# creates a return point for branch L3
 	addi	s0, s0, 4		# p++
 	j	L1
 L2:		
@@ -76,5 +76,5 @@ L2:
 	jr	ra
 	
 L3:
-	add	s3, t0, zero
-	j	Return
+	add	s3, t0, zero		# sets the value of max to the current value of *p
+	j	Return			# jumps back to the return loop
