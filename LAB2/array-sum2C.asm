@@ -62,12 +62,18 @@ main:
 	la	s0, abc	        	# p = abc
 	addi	s1, s0, 24		# end = p + 6
 	add	s2, zero, zero	        # sum = 0 
+	addi	s3, zero, -600		# max = 0
 L1:
 	beq	s0, s1, L2		# if (p == end) goto L2
 	lw	t0, (s0)		# t0 = *p
 	add	s2, s2, t0		# sum += t0
+	blt	s3, t0, L3
 	addi	s0, s0, 4		# p++
 	j	L1
 L2:		
 	add	a0, zero, zero	        # return value from main = 0
 	jr	ra
+	
+L3:
+	add	s3, t0, zero
+	j	L1
