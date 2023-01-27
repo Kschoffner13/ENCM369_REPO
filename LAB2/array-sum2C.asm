@@ -63,14 +63,14 @@ main:
 	addi	s1, s0, 24		# end = p + 6
 	add	s2, zero, zero	        # sum = 0 
 	addi	s3, zero, -600		# max = -600 so that the blt instruction can be used
-L1:
+LL1:
 	beq	s0, s1, L2		# if (p == end) goto L2
 	lw	t0, (s0)		# t0 = *p
 	add	s2, s2, t0		# sum += t0
 	blt	s3, t0, L3		# checks if max is less than *p
 Return:					# creates a return point for branch L3
 	addi	s0, s0, 4		# p++
-	j	L1
+	j	LL1
 L2:		
 	add	a0, zero, zero	        # return value from main = 0
 	jr	ra

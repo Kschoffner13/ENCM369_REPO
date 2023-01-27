@@ -38,29 +38,73 @@ int main(void)
   int *guard;
   int min, j, k;
 
+
+
+  // dont worry about these loops
+  printf("Alpha before changes: \n");
+
+  for(int i =0; i < 8; i++){
+    printf("%d ", alpha[i]);
+  }
+  printf("\n");
+  printf("beta: \n");
+
+  for(int i =0; i < 8; i++){
+    printf("%d ", beta[i]);
+  }
+
+  
+
   // Put value of smallest element of alpha into min.
   p = alpha;
   guard = p + 8;
   min = *p;
-  for (p++; p != guard; p++) {
-    if (*p < min)
-      min = *p;
-  }
 
-  printf("The value of min = %d\n", min);
+  p++;
+  f_top:
+    if (p == guard) goto f_bot;
+    if_top:
+      if(*p >= min) goto if_bot;
+        min = *p;
+      
+    if_bot:
+      ;
+    p++;
+    goto f_top;
+  
+  f_bot:
+    ;
+
+
+
+
+  printf("\nThe value of min = %d\n", min);
       
   // Copy elements from beta to alpha in reverse order,
   // writing over the initial values in alpha.
   j = 0;
   k = 7;
-  while (j < 8) {
-    alpha[j] = beta[k];
+
+
+  w_top:
+    if(j >=8) goto w_bot;
+     alpha[j] = beta[k];
     j++;
     k--;
-  }
+    goto w_top;
+  
+  w_bot:
+    ;
 
-  for(int i =0; i< sizeof(alpha); i++){
-    printf("Alpha of %d is: %d\n", i, alpha[i]);
+  
+
+
+  // dont worry about this loop
+
+  printf("Alpha after changes: \n");
+
+  for(int i =0; i < 8; i++){
+    printf("%d ", alpha[i]);
   }
 
   return 0;
