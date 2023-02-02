@@ -1,4 +1,4 @@
-# exB.asm
+ # exB.asm
 # ENCM 369 Winter 2023 Lab 3 Exercise B
 
 # BEGINNING of start-up & clean-up code

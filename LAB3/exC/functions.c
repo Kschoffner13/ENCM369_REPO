@@ -15,11 +15,14 @@
  * language code to be generated.
  */
 
+
+#include <stdio.h>
+
 int procA(int first, int second, int third, int fourth);
 
 int procB(int cat, int dog);
 
-int train = 0x20000;
+int train = 0x20000; // 131072
 
 int main(void)
 {
@@ -31,16 +34,19 @@ int main(void)
    */
   int plane;
   int boat;
-  boat = 0xa000;
-  plane = 0x3000;
-  boat += procA(6, 4, 3, 2);
-  train += (boat - plane);
+  boat = 0xa000;      // boat = 40960
+  plane = 0x3000;     // plane = 12288
+  printf("intial: boat = %d, plane = %d\n", boat, plane);
+  boat += procA(6, 4, 3, 2); // = 40960 + 2315 = 43275
+  printf("boat after procA = %d\n", boat);
+  train += (boat - plane);   // = 131072 + (43275-12288) = 131072 + 30987 = 162059
 
-  /* At this point train should have a value of 0x2790b. */
+  /* At this point train should have a value of 0x2790b (162059 in base 10). */
 
   return 0;
 }
 
+//            a0(6)       a1(4)     a2(3)       a4(2)
 int procA(int first, int second, int third, int fourth)
 {
   /* Hint: This is a nonleaf function, so it needs a stack frame,
@@ -56,13 +62,19 @@ int procA(int first, int second, int third, int fourth)
   int alpha;
   int beta;
   int gamma;
-  beta = procB(fourth, third);
-  gamma = procB(second, first);
-  alpha = procB(third, fourth);
+  beta = procB(fourth, third);    // returns 256 * 2 + 3 = 515
+  gamma = procB(second, first);   // returns 256 * 4 + 6 = 1030
+  alpha = procB(third, fourth);   // returns 256 * 3 + 2 = 770
 
-  return alpha + beta + gamma;
+  printf("beta = %d, gamma = %d, alpha = %d\n", beta, gamma, alpha);
+
+
+//     return value goes in a0
+  return alpha + beta + gamma;    // returns 2315
 }
 
+
+// use t-regs
 int procB(int cat, int dog)
 {
   /* Hint: this is a leaf function, and it shouldn't need to use any
