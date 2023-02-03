@@ -1,10 +1,10 @@
-// lab03exE.c: ENCM 369 Winter 2023 Lab 3 Exercise E
+ // lab03exE.c: ENCM 369 Winter 2023 Lab 3 Exercise E
 
 // INSTRUCTIONS:
 //   You are to write a MARS translation of this C program, compatible
 //   with all of the calling conventions presented so far in ENCM 369.
 //
-
+#include <stdio.h>
 int clamp(int bound, int x);
 
 int special_sum(int bound, const int *x, int n);
@@ -25,6 +25,9 @@ int main(void)
     red = special_sum(10, aaa, 4);
     green = special_sum(200, bbb, 4);
     blue += special_sum(500, ccc, 6) + red + green;
+    //              = 3 ^
+
+    printf("red = %d, green = %d, blue = %d\n", red, green, blue);
 
     // Here blue should have a value of 1416.
 
@@ -37,7 +40,8 @@ int clamp(int bound, int x)
     // you should code it in assembly language with only one jr ra
     // instruction at the end of the procedure definition.
 
-    // Hint: Something like sub t0, zero, a0 might be useful somewhere.
+    // Hint: Something like sub t0, zero, a0 might be useful somewhere.(makes it negtive)
+    // alos this a leaf function so use t regs 
 
     if (x < -bound)
         return -bound;

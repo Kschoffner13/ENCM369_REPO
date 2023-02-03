@@ -44,10 +44,22 @@ main:
 	addi	sp, sp, -32
  	sw 	ra, 0(sp)
 
-	la	t0, foo	# t0 = &foo[0]
+	la	t0, foo		# t0 = &foo[0]
 	addi	a0, t0, 20	# a0 = &foo[5]
 	addi	a1, t0, 0	# a1 = &foo[0]
 	jal	swap
+	
+	la	t0, foo		# t0 = &foo[0]
+	addi	a0, t0, 16	# a0 = &foo[4]
+	addi	a1, t0, 4	# a1 = &foo[1]
+	jal	swap
+	
+	la	t0, foo		# t0 = &foo[0]
+	addi	a0, t0, 12	# a0 = &foo[3]
+	addi	a1, t0, 8	# a1 = &foo[2]
+	jal	swap
+	
+	### this program just puts foo in reverse order
 
 	# Students: Replace this comment with code to correctly
 	# implement the next two calls to swap in main in swap.c.
@@ -58,11 +70,23 @@ main:
 	jr	ra
 
 # void swap(int *left, int *right)
-#
+# (swap is a leaf function so no need to save anything)
+# use t-regs t1-t6 (if needed)
+#	*left 	t1
+#	*right	t2
+#	old_star_left	t3
 	.text
 	.globl  swap
 swap:
-	# Students: Replace this comment with code to make swap
-	# do its job correctly.
 
+	lw	t1, (a0)	# t1 =  value of *left 
+	lw	t2, (a1)	# t2 = value of *right
+	
+	mv 	t3, t1		# tmp = value of t1
+	
+	add	t4, a0, zero	# adress of left
+	add	t5, a1, zero	# address of right
+	
+	sw 	t2, (t4)	# store the contents of right into left
+	sw	t3, (t5)	# store the contents of old_star_left into right 
 	jr	ra

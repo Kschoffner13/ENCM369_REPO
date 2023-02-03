@@ -1,12 +1,16 @@
+#include <stdio.h>
+
+
+
 int procC(int x)
 {
     // POINT ONE
-
     return 8 * x + 2 * x;
 }
 
 void procB(int *p, int *q)
 {
+    printf("*q = %d\n", *q);
     while (p != q) {
         *p = procC(*p);
         p++;
