@@ -1,0 +1,71 @@
+
+funcs.o:     file format elf64-x86-64
+
+
+Disassembly of section .text:
+
+0000000000000000 <use_pointers>:
+   0:	55                   	push   %rbp
+   1:	48 89 e5             	mov    %rsp,%rbp
+   4:	48 89 7d e8          	mov    %rdi,-0x18(%rbp)
+   8:	89 75 e4             	mov    %esi,-0x1c(%rbp)
+   b:	8b 45 e4             	mov    -0x1c(%rbp),%eax
+   e:	48 98                	cltq   
+  10:	48 8d 14 85 00 00 00 	lea    0x0(,%rax,4),%rdx
+  17:	00 
+  18:	48 8b 45 e8          	mov    -0x18(%rbp),%rax
+  1c:	48 01 d0             	add    %rdx,%rax
+  1f:	48 89 45 f8          	mov    %rax,-0x8(%rbp)
+  23:	48 8b 45 e8          	mov    -0x18(%rbp),%rax
+  27:	8b 00                	mov    (%rax),%eax
+  29:	89 45 f4             	mov    %eax,-0xc(%rbp)
+  2c:	eb 19                	jmp    47 <use_pointers+0x47>
+  2e:	48 8b 45 e8          	mov    -0x18(%rbp),%rax
+  32:	8b 00                	mov    (%rax),%eax
+  34:	39 45 f4             	cmp    %eax,-0xc(%rbp)
+  37:	7d 09                	jge    42 <use_pointers+0x42>
+  39:	48 8b 45 e8          	mov    -0x18(%rbp),%rax
+  3d:	8b 00                	mov    (%rax),%eax
+  3f:	89 45 f4             	mov    %eax,-0xc(%rbp)
+  42:	48 83 45 e8 04       	addq   $0x4,-0x18(%rbp)
+  47:	48 8b 45 e8          	mov    -0x18(%rbp),%rax
+  4b:	48 3b 45 f8          	cmp    -0x8(%rbp),%rax
+  4f:	75 dd                	jne    2e <use_pointers+0x2e>
+  51:	8b 45 f4             	mov    -0xc(%rbp),%eax
+  54:	5d                   	pop    %rbp
+  55:	c3                   	retq   
+
+0000000000000056 <use_indexes>:
+  56:	55                   	push   %rbp
+  57:	48 89 e5             	mov    %rsp,%rbp
+  5a:	48 89 7d e8          	mov    %rdi,-0x18(%rbp)
+  5e:	89 75 e4             	mov    %esi,-0x1c(%rbp)
+  61:	48 8b 45 e8          	mov    -0x18(%rbp),%rax
+  65:	8b 00                	mov    (%rax),%eax
+  67:	89 45 fc             	mov    %eax,-0x4(%rbp)
+  6a:	c7 45 f8 00 00 00 00 	movl   $0x0,-0x8(%rbp)
+  71:	eb 38                	jmp    ab <use_indexes+0x55>
+  73:	8b 45 f8             	mov    -0x8(%rbp),%eax
+  76:	48 98                	cltq   
+  78:	48 8d 14 85 00 00 00 	lea    0x0(,%rax,4),%rdx
+  7f:	00 
+  80:	48 8b 45 e8          	mov    -0x18(%rbp),%rax
+  84:	48 01 d0             	add    %rdx,%rax
+  87:	8b 00                	mov    (%rax),%eax
+  89:	39 45 fc             	cmp    %eax,-0x4(%rbp)
+  8c:	7d 19                	jge    a7 <use_indexes+0x51>
+  8e:	8b 45 f8             	mov    -0x8(%rbp),%eax
+  91:	48 98                	cltq   
+  93:	48 8d 14 85 00 00 00 	lea    0x0(,%rax,4),%rdx
+  9a:	00 
+  9b:	48 8b 45 e8          	mov    -0x18(%rbp),%rax
+  9f:	48 01 d0             	add    %rdx,%rax
+  a2:	8b 00                	mov    (%rax),%eax
+  a4:	89 45 fc             	mov    %eax,-0x4(%rbp)
+  a7:	83 45 f8 01          	addl   $0x1,-0x8(%rbp)
+  ab:	8b 45 f8             	mov    -0x8(%rbp),%eax
+  ae:	3b 45 e4             	cmp    -0x1c(%rbp),%eax
+  b1:	7c c0                	jl     73 <use_indexes+0x1d>
+  b3:	8b 45 fc             	mov    -0x4(%rbp),%eax
+  b6:	5d                   	pop    %rbp
+  b7:	c3                   	retq   

@@ -1,0 +1,50 @@
+run 1
+    max from use_pointers: 99999
+    time for use_pointers, in ns: 53704.00
+    max from use_indexes: 99999
+    time for use_indexes, in ns: 49860.00
+run 2
+    max from use_pointers: 99999
+    time for use_pointers, in ns: 49454.00
+    max from use_indexes: 99999
+    time for use_indexes, in ns: 49431.00
+run 3
+    max from use_pointers: 99999
+    time for use_pointers, in ns: 49503.00
+    max from use_indexes: 99999
+    time for use_indexes, in ns: 49486.00
+run 4
+    max from use_pointers: 99999
+    time for use_pointers, in ns: 49421.00
+    max from use_indexes: 99999
+    time for use_indexes, in ns: 49392.00
+run 5
+    max from use_pointers: 99999
+    time for use_pointers, in ns: 49528.00
+    max from use_indexes: 99999
+    time for use_indexes, in ns: 49453.00
+run 6
+    max from use_pointers: 99999
+    time for use_pointers, in ns: 49502.00
+    max from use_indexes: 99999
+    time for use_indexes, in ns: 49449.00
+run 7
+    max from use_pointers: 99999
+    time for use_pointers, in ns: 49491.00
+    max from use_indexes: 99999
+    time for use_indexes, in ns: 49473.00
+run 8
+    max from use_pointers: 99999
+    time for use_pointers, in ns: 51998.00
+    max from use_indexes: 99999
+    time for use_indexes, in ns: 49479.00
+run 9
+    max from use_pointers: 99999
+    time for use_pointers, in ns: 49415.00
+    max from use_indexes: 99999
+    time for use_indexes, in ns: 49398.00
+run 10
+    max from use_pointers: 99999
+    time for use_pointers, in ns: 49495.00
+    max from use_indexes: 99999
+    time for use_indexes, in ns: 49424.00
