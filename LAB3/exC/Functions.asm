@@ -40,7 +40,7 @@ main_rv:
 	.global procA
 procA:
 	# we have 8 total words: first, second, third, fourth, alpha, beta, gamma, and ra 
-	# that neeed to be saved. 8 * 4 = 32 
+	# that neeed to be saved. 10 * 4 = 32
 	
 	# prologue
 	addi 	sp, sp -32	# shrink sp by 8 words
@@ -136,11 +136,11 @@ main:
 	jal	procA		# call procA(6, 4, 3, 2)
 	add	s1, s1, a0	# boat += procA(6, 4, 3, 2)
 	
-	la	s3, train	# puts address of train into s3
-	lw	t0, (s3)	# put the value of train in t0	
+	la	s2, train	# puts address of train into s3
+	lw	t0, (s2)	# put the value of train in t0	
 	sub	t1, s1, s0	# t1 = (boat - plane)
 	add	t0, t0, t1	# t0 = valueof(train) + (boat-plane)
-	sw	t0, (s3)	# store back in train
+	sw	t0, (s2)	# store back in train
 	
 	# epilouge
 	lw	s0, 0(sp)	# restore old s0
